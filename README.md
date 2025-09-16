@@ -1,5 +1,10 @@
 # Pacote Laravel Mercado Pago
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/hillpires/laravel-mercadopago.svg?style=flat-square)](https://packagist.org/packages/hillpires/laravel-mercadopago)
+[![Total Downloads](https://img.shields.io/packagist/dt/hillpires/laravel-mercadopago.svg?style=flat-square)](https://packagist.org/packages/hillpires/laravel-mercadopago)
+[![GitHub stars](https://img.shields.io/github/stars/hillgp/mercadopago-laravel.svg?style=flat-square)](https://github.com/hillgp/mercadopago-laravel)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/hillgp/mercadopago-laravel/blob/main/LICENSE)
+
 ## Introdução
 
 Este pacote fornece uma integração completa com o Mercado Pago para aplicações Laravel. Inclui:
@@ -16,35 +21,75 @@ Este pacote fornece uma integração completa com o Mercado Pago para aplicaçõ
 
 O pacote é compatível com Laravel 11+ e PHP 8.2+. O ServiceProvider é registrado automaticamente via auto-discovery do Composer.
 
-## Como Baixar e Instalar
+## 📦 Instalação
 
-### Baixar o Pacote
+### Opção 1: Via GitHub (Recomendado)
 
-O pacote é distribuído via Composer. Para instalar em sua aplicação Laravel:
+Para instalar diretamente do repositório GitHub:
 
-1. **Via Composer (recomendado para uso):**
+1. **Adicione o repositório no composer.json:**
 
-   Abra o terminal no diretório da sua aplicação Laravel e execute:
-
-   ```
-   composer require hillpires/laravel-mercadopago
-   ```
-
-   Isso baixa e instala o pacote automaticamente no vendor/.
-
-2. **Clonar o Repositório (para desenvolvimento ou customização):**
-
-   Se você quiser o código fonte para modificar ou contribuir:
-
-   ```
-   git clone https://github.com/hillpires/laravel-mercadopago.git vendor/hillpires/laravel-mercadopago
+   ```json
+   {
+       "repositories": [
+           {
+               "type": "vcs",
+               "url": "https://github.com/hillgp/mercadopago-laravel"
+           }
+       ],
+       "require": {
+           "hillpires/laravel-mercadopago": "dev-main"
+       }
+   }
    ```
 
-   Em seguida, adicione o autoload no composer.json da sua app se necessário, mas o Composer handle isso.
+2. **Instale via Composer:**
 
-### Instalação
+   ```bash
+   composer update
+   ```
 
-Após baixar, siga estes passos para instalar e configurar o pacote:
+### Opção 2: Via Packagist (Quando disponível)
+
+```bash
+composer require hillpires/laravel-mercadopago
+```
+
+### Opção 3: Instalação Local (Desenvolvimento)
+
+Para desenvolvimento ou customização local:
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/hillgp/mercadopago-laravel.git vendor/hillpires/laravel-mercadopago
+   ```
+
+2. **Configure o composer.json:**
+
+   ```json
+   {
+       "repositories": [
+           {
+               "type": "path",
+               "url": "./vendor/hillpires/laravel-mercadopago"
+           }
+       ],
+       "require": {
+           "hillpires/laravel-mercadopago": "*"
+       }
+   }
+   ```
+
+3. **Atualize as dependências:**
+
+   ```bash
+   composer update
+   ```
+
+## 🚀 Configuração
+
+Após a instalação, siga estes passos para configurar o pacote:
 
 1. **Publicar os arquivos do pacote (config, migrations e views):**
 
@@ -85,7 +130,9 @@ Após baixar, siga estes passos para instalar e configurar o pacote:
    MERCADOPAGO_MODO=production
    ```
 
-   Obtenha as credenciais no painel do Mercado Pago: [Sandbox](https://www.mercadopago.com.br/developers/panel/sandbox) ou [Produção](https://www.mercadopago.com.br/developers/panel).
+   Obtenha as credenciais no painel do Mercado Pago: 
+   - [Sandbox](https://www.mercadopago.com.br/developers/panel/sandbox) 
+   - [Produção](https://www.mercadopago.com.br/developers/panel)
 
    As configurações globais serão carregadas do .env ou salvas na tabela via CRUD do pacote.
 
@@ -98,16 +145,32 @@ Após baixar, siga estes passos para instalar e configurar o pacote:
 
 5. **Verificar a instalação:**
 
-   - Acesse `/configuracoes` na sua app (adicione a rota ao web.php se necessário, mas o pacote carrega rotas automaticamente).
+   - Acesse `/configuracoes` na sua app (o pacote carrega rotas automaticamente).
    - Crie uma configuração via interface do CRUD para testar.
 
-O ServiceProvider é auto-registrado pelo Composer, então não precisa adicionar manualmente em config/app.php (a menos que auto-discovery esteja desabilitado).
+O ServiceProvider é auto-registrado pelo Composer, então não precisa adicionar manualmente em `config/app.php` (a menos que auto-discovery esteja desabilitado).
 
-## Como Testar o Pacote em Desenvolvimento
+## 📋 Rotas Disponíveis
+
+O pacote registra automaticamente as seguintes rotas:
+
+| Método | URI | Nome | Descrição |
+|--------|-----|------|-----------|
+| GET | `/configuracoes` | `configuracoes.index` | Lista todas as configurações |
+| GET | `/configuracoes/create` | `configuracoes.create` | Formulário de criação |
+| POST | `/configuracoes` | `configuracoes.store` | Salva nova configuração |
+| GET | `/configuracoes/{id}` | `configuracoes.show` | Exibe configuração específica |
+| GET | `/configuracoes/{id}/edit` | `configuracoes.edit` | Formulário de edição |
+| PUT | `/configuracoes/{id}` | `configuracoes.update` | Atualiza configuração |
+| DELETE | `/configuracoes/{id}` | `configuracoes.destroy` | Remove configuração |
+| POST | `/configuracoes/{id}/teste` | `configuracoes.teste` | Testa conexão com Mercado Pago |
+| POST | `/configuracoes/{id}/ativar` | `configuracoes.ativar` | Ativa configuração |
+
+## 🧪 Testando o Pacote
 
 Para testar o pacote durante o desenvolvimento (no diretório do pacote ou localmente), crie uma aplicação Laravel de teste:
 
-1. **Criar uma nova aplicação Laravel para teste:**
+### Criando uma Aplicação de Teste
 
    No terminal, crie uma app Laravel vazia (requer Laravel Installer ou Composer create-project):
 
@@ -123,19 +186,19 @@ Para testar o pacote durante o desenvolvimento (no diretório do pacote ou local
    cd test-app
    ```
 
-2. **Instalar o pacote local (desenvolvimento):**
+### Instalando o Pacote
 
-   No diretório da sua app de teste, edite composer.json para requerer o caminho local do pacote:
+   No diretório da sua app de teste, edite `composer.json`:
 
-   ```
+   ```json
    "repositories": [
        {
-           "type": "path",
-           "url": "../mercadopago"  // Caminho para o diretório do pacote (ajuste se necessário)
+           "type": "vcs",
+           "url": "https://github.com/hillgp/mercadopago-laravel"
        }
    ],
    "require": {
-       "hillpires/laravel-mercadopago": "*"
+       "hillpires/laravel-mercadopago": "dev-main"
    }
    ```
 
@@ -145,77 +208,110 @@ Para testar o pacote durante o desenvolvimento (no diretório do pacote ou local
    composer update
    ```
 
-3. **Publicar e migrar:**
+### Configurando o Pacote
 
    ```
    php artisan vendor:publish --provider="HillPires\\LaravelMercadoPago\\MercadoPagoServiceProvider" --all
    php artisan migrate
    ```
 
-4. **Configurar .env da app de teste:**
+### Configurando Credenciais
 
-   Use credenciais de sandbox do Mercado Pago para testes. Adicione as variáveis conforme seção anterior.
+   Adicione no `.env` da app de teste:
 
-5. **Adicionar rota de teste no routes/web.php (temporário para teste):**
-
-   ```
-   Route::get('/test-config', function () {
-       $config = \HillPires\LaravelMercadoPago\Models\Configuracao::ativa();
-       return view('test', compact('config'));
-   });
+   ```env
+   MERCADOPAGO_SANDBOX_ACCESS_TOKEN=sua_access_token_sandbox
+   MERCADOPAGO_SANDBOX_PUBLIC_KEY=sua_public_key_sandbox
+   MERCADOPAGO_MODO=sandbox
    ```
 
-   Crie uma view simples em resources/views/test.blade.php para visualizar a configuração ativa.
+### Testando a Instalação
 
-6. **Rodar o servidor de desenvolvimento:**
-
-   ```
+   ```bash
    php artisan serve
    ```
 
-7. **Testar:**
+   Acesse: `http://127.0.0.1:8000/configuracoes`
 
-   - Acesse http://127.0.0.1:8000/configuracoes para o CRUD (crie/editar configurações).
-   - Clique em "Testar Conexão" para verificar credenciais (use sandbox para testes).
-   - Para testar integrações (PIX, Cartão, Boleto, Transferências):
-     - Crie uma configuração com o método habilitado.
-     - Use o exemplo de código no README.md em um controller de teste (ex: TestController) para simular pagamentos.
-     - Para PIX: Verifique QR Code no response.
-     - Para Cartão: Use ferramenta de teste do Mercado Pago (card numbers como 5031431234560000 para sandbox).
-     - Para Boleto: Verifique URL no response.
-     - Para Transferências: Use email válido e verifique limite.
-   - Use Postman ou browser para chamar /configuracoes/{id}/teste e ver status JSON.
+## 💡 Dicas Importantes
 
-   Para testes mais avançados, use Orchestra Testbench (dev dependency) para unit tests no pacote, mas para funcional, a app de teste é ideal.
+- **Sempre use modo sandbox para testes** para evitar transações reais
+- **Verifique os logs** em `storage/logs` para debug
+- **Teste a conexão** usando o botão "Testar Conexão" na interface
+- **Para frontend**, inclua o script do Mercado Pago com a public_key
 
-   **Dicas para Testes:**
-   - Use modo sandbox para evitar transações reais.
-   - Verifique logs do Laravel (storage/logs) para erros.
-   - Certifique-se de que o .env tem as credenciais corretas do painel Mercado Pago.
-   - Para frontend, inclua o script do Mercado Pago com public_key e teste tokenização.
+## ⚙️ Configuração Avançada
 
-Se precisar de testes automatizados, adicione PHPUnit no pacote e crie testes para o model e controller.
+### Arquivo de Configuração
 
-## Configuração
+O arquivo `config/mercadopago.php` contém todas as configurações do pacote:
+
+```php
+return [
+    'access_token' => env('MERCADOPAGO_SANDBOX_ACCESS_TOKEN'),
+    'public_key' => env('MERCADOPAGO_SANDBOX_PUBLIC_KEY'),
+    'modo' => env('MERCADOPAGO_MODO', 'sandbox'),
+    // ... outras configurações
+];
+```
 
 [resto do conteúdo permanece o mesmo, mas para brevidade, assumindo que o resto é o mesmo do anterior]
 
-## Uso
+## 🔧 Uso
+
+### Exemplo Básico
+
+```php
+use HillPires\LaravelMercadoPago\Models\Configuracao;
+
+// Obter configuração ativa
+$config = Configuracao::ativa();
+
+// Testar conexão
+if ($config->testarConexao()) {
+    echo "Conexão estabelecida com sucesso!";
+}
+```
 
 [manter as seções de uso como estão]
 
-## Troubleshooting
+## 🐛 Troubleshooting
+
+### Problemas Comuns
+
+**Erro: "Class not found"**
+- Execute: `composer dump-autoload`
+
+**Rotas não funcionam**
+- Execute: `php artisan route:clear`
+- Verifique se o ServiceProvider está registrado
+
+**Erro de conexão com Mercado Pago**
+- Verifique as credenciais no `.env`
+- Use modo sandbox para testes
+- Teste a conexão via interface `/configuracoes`
 
 [manter]
 
-## Contribuição
+## 🤝 Contribuição
 
-Fork, crie branch, PR.
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-## Licença
+## 📄 Licença
 
-MIT. Copyright (c) 2025 Hill Pires.
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## Suporte
+## 📞 Suporte
 
-Issue no GitHub.
+Se você encontrar algum problema ou tiver dúvidas:
+
+- [Abra uma issue no GitHub](https://github.com/hillgp/mercadopago-laravel/issues)
+- [Documentação do Mercado Pago](https://www.mercadopago.com.br/developers)
+
+---
+
+**Desenvolvido com ❤️ por [Hill Pires](https://github.com/hillgp)**
