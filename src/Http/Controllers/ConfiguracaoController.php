@@ -1,10 +1,10 @@
 <?php
 
-namespace OakAI\LaravelMercadoPago\Http\Controllers;
+namespace HillPires\LaravelMercadoPago\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use OakAI\LaravelMercadoPago\Models\Configuracao;
+use HillPires\LaravelMercadoPago\Models\Configuracao;
 
 /**
  * Controller para gerenciamento de configurações do Mercado Pago.
@@ -83,7 +83,7 @@ class ConfiguracaoController extends Controller
     /**
      * Exibe uma configuração específica.
      *
-     * @param  \OakAI\LaravelMercadoPago\Models\Configuracao  $configuracao
+     * @param  \HillPires\LaravelMercadoPago\Models\Configuracao  $configuracao
      * @return \Illuminate\View\View
      */
     public function show(Configuracao $configuracao)
@@ -94,7 +94,7 @@ class ConfiguracaoController extends Controller
     /**
      * Mostra o formulário para edição de uma configuração.
      *
-     * @param  \OakAI\LaravelMercadoPago\Models\Configuracao  $configuracao
+     * @param  \HillPires\LaravelMercadoPago\Models\Configuracao  $configuracao
      * @return \Illuminate\View\View
      */
     public function edit(Configuracao $configuracao)
@@ -106,7 +106,7 @@ class ConfiguracaoController extends Controller
      * Atualiza uma configuração no banco de dados.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \OakAI\LaravelMercadoPago\Models\Configuracao  $configuracao
+     * @param  \HillPires\LaravelMercadoPago\Models\Configuracao  $configuracao
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Configuracao $configuracao)
@@ -151,7 +151,7 @@ class ConfiguracaoController extends Controller
     /**
      * Remove uma configuração do banco de dados.
      *
-     * @param  \OakAI\LaravelMercadoPago\Models\Configuracao  $configuracao
+     * @param  \HillPires\LaravelMercadoPago\Models\Configuracao  $configuracao
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Configuracao $configuracao)
@@ -165,7 +165,7 @@ class ConfiguracaoController extends Controller
     /**
      * Testa a conexão com o Mercado Pago para uma configuração.
      *
-     * @param  \OakAI\LaravelMercadoPago\Models\Configuracao  $configuracao
+     * @param  \HillPires\LaravelMercadoPago\Models\Configuracao  $configuracao
      * @return \Illuminate\Http\JsonResponse
      */
     public function teste(Configuracao $configuracao)

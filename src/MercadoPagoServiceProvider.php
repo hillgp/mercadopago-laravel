@@ -3,8 +3,6 @@
 namespace HillPires\LaravelMercadoPago;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 use MercadoPago\MercadoPagoConfig;
 
 /**
@@ -52,7 +50,7 @@ class MercadoPagoServiceProvider extends ServiceProvider
         // Carregar views do pacote
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-mercadopago');
 
-        // Carregar rotas do pacote (CRUD de configurações)
+        // Carregar rotas do pacote
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         // Inicializar SDK do Mercado Pago com configurações
@@ -74,9 +72,6 @@ class MercadoPagoServiceProvider extends ServiceProvider
         // Mergear configurações padrão
         $this->mergeConfigFrom(__DIR__ . '/../config/mercadopago.php', 'mercadopago');
 
-        // Bind do SDK do Mercado Pago
-        $this->app->singleton('mercadopago', function ($app) {
-            return new \MercadoPago\MercadoPago(config('mercadopago.access_token'));
-        });
+        // Nenhum bind necessário; o SDK v2 usa MercadoPagoConfig::setAccessToken
     }
 }

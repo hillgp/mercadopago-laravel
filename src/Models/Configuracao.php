@@ -1,6 +1,6 @@
 <?php
 
-namespace OakAI\LaravelMercadoPago\Models;
+namespace HillPires\LaravelMercadoPago\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
