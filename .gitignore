@@ -1,0 +1,25 @@
+# Composer
+/vendor/
+/composer.lock
+
+# Node
+/node_modules/
+/npm-debug.log*
+/yarn.lock
+/pnpm-lock.yaml
+
+# IDEs/OS
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db
+
+# Coverage/Build
+/.phpunit.result.cache
+/build/
+/dist/
+
+# Logs
+/storage/logs/
+
+
